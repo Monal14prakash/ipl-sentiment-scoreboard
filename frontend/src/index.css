@@ -1,0 +1,579 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ─── CSS Custom Properties (Dark Theme) ──────────────────────────────────── */
+:root {
+  --bg-primary: #060F1F;
+  --bg-secondary: #0A1929;
+  --bg-card: rgba(10, 25, 47, 0.75);
+  --bg-dark: #040C18;
+  --bg-input: #0D1F36;
+
+  --text-primary: #E6F1FF;
+  --text-secondary: #A8B2D1;
+  --text-muted: #8892B0;
+  --text-white: #FFFFFF;
+
+  --electric-blue: #00D4FF;
+  --electric-blue-dim: rgba(0, 212, 255, 0.15);
+  --ipl-gold: #FFD700;
+  --ipl-gold-dim: rgba(255, 215, 0, 0.15);
+  --neon-green: #39FF14;
+  --neon-pink: #FF006E;
+  --neon-purple: #BF40BF;
+
+  --positive: #39FF14;
+  --negative: #FF4444;
+  --neutral: #8892B0;
+
+  --glass-bg: rgba(10, 25, 47, 0.60);
+  --glass-border: rgba(0, 212, 255, 0.12);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 212, 255, 0.05);
+  --glass-blur: 16px;
+
+  --font-display: 'Orbitron', monospace;
+  --font-heading: 'Rajdhani', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --border-light: rgba(0, 212, 255, 0.06);
+  --border-medium: rgba(0, 212, 255, 0.12);
+}
+
+/* ─── Global Reset ────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ─── Scrollbar Styling ──────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--electric-blue);
+}
+
+/* ─── Glassmorphism Card (Dark) ───────────────────────────────────────────── */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 212, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.08), 0 2px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.glass-card-gold {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
+}
+
+.glass-card-gold:hover {
+  border-color: rgba(255, 215, 0, 0.30);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Glow Effects (Dark - neon glows) ───────────────────────────────────── */
+.glow-blue {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 40px rgba(0, 212, 255, 0.1);
+}
+
+.glow-gold {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.1);
+}
+
+.glow-green {
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.3), 0 0 40px rgba(57, 255, 20, 0.1);
+}
+
+.glow-red {
+  box-shadow: 0 0 20px rgba(255, 68, 68, 0.3), 0 0 40px rgba(255, 68, 68, 0.1);
+}
+
+.text-glow-blue {
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+  color: var(--electric-blue);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  color: var(--ipl-gold);
+}
+
+.text-glow-green {
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+  color: var(--positive);
+}
+
+/* ─── Animated Stadium Background (Dark - Night Match) ───────────────────── */
+.stadium-bg {
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 0%, rgba(0, 212, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 40% at 20% 20%, rgba(255, 215, 0, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 40% at 80% 20%, rgba(255, 215, 0, 0.04) 0%, transparent 50%),
+    linear-gradient(180deg, #060F1F 0%, #0A1929 30%, #060F1F 100%);
+  position: relative;
+}
+
+.stadium-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-conic-gradient(from 0deg at 50% -20%,
+      transparent 0deg,
+      rgba(255, 215, 0, 0.02) 2deg,
+      transparent 4deg);
+  animation: stadium-sweep 30s linear infinite;
+  pointer-events: none;
+}
+
+/* ─── Ticker Animation ────────────────────────────────────────────────────── */
+.ticker-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.ticker {
+  display: inline-flex;
+  animation: ticker-scroll 30s linear infinite;
+}
+
+.ticker:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Live Pulse ─────────────────────────────────────────────────────────── */
+.live-dot {
+  width: 10px;
+  height: 10px;
+  background: #DC2626;
+  border-radius: 50%;
+  position: relative;
+  animation: live-pulse 1.5s ease-in-out infinite;
+}
+
+.live-dot::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: rgba(220, 38, 38, 0.25);
+  animation: live-ring 1.5s ease-in-out infinite;
+}
+
+/* ─── Cricket Ball Spinner ───────────────────────────────────────────────── */
+.cricket-ball-spin {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e74c3c 0%, #c0392b 50%, #a93226 100%);
+  position: relative;
+  animation: ball-spin 1s linear infinite;
+  box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(231, 76, 60, 0.25);
+}
+
+.cricket-ball-spin::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: white;
+  transform: translateY(-50%);
+  border-radius: 1px;
+}
+
+/* ─── Sentiment Bar ──────────────────────────────────────────────────────── */
+.sentiment-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--bg-dark);
+  overflow: hidden;
+  position: relative;
+}
+
+.sentiment-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.sentiment-bar-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5));
+  animation: bar-shimmer 2s ease-in-out infinite;
+}
+
+/* ─── Floating Animation ────────────────────────────────────────────────── */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-delay-1 {
+  animation-delay: -1s;
+}
+
+.float-delay-2 {
+  animation-delay: -2s;
+}
+
+.float-delay-3 {
+  animation-delay: -3s;
+}
+
+.float-delay-4 {
+  animation-delay: -4s;
+}
+
+/* ─── Gradient Text ──────────────────────────────────────────────────────── */
+.gradient-text-blue {
+  background: linear-gradient(135deg, #00D4FF, #0077FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-fire {
+  background: linear-gradient(135deg, #FFD700, #FF006E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Section Header ────────────────────────────────────────────────────── */
+.section-header {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.section-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--electric-blue), transparent);
+  border-radius: 2px;
+}
+
+/* ─── Keyframe Animations ────────────────────────────────────────────────── */
+
+@keyframes stadium-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes live-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes live-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes ball-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes bar-shimmer {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes firework-burst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+
+  0%,
+  100% {
+    border-color: transparent;
+  }
+
+  50% {
+    border-color: var(--electric-blue);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes crowd-wave {
+
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  25% {
+    transform: scaleY(1.15);
+  }
+
+  50% {
+    transform: scaleY(0.9);
+  }
+
+  75% {
+    transform: scaleY(1.05);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ─── Utility Classes ────────────────────────────────────────────────────── */
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient {
+  animation: gradient-shift 3s ease infinite;
+  background-size: 200% 200%;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+.animate-crowd-wave {
+  animation: crowd-wave 3s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* ─── Layout Utilities ───────────────────────────────────────────────────── */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  padding: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.col-span-full {
+  grid-column: 1 / -1;
+}
+
+.col-span-8 {
+  grid-column: span 8;
+}
+
+.col-span-6 {
+  grid-column: span 6;
+}
+
+.col-span-4 {
+  grid-column: span 4;
+}
+
+.col-span-3 {
+  grid-column: span 3;
+}
+
+@media (max-width: 1200px) {
+
+  .col-span-8,
+  .col-span-6,
+  .col-span-4,
+  .col-span-3 {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .col-span-8,
+  .col-span-6,
+  .col-span-4,
+  .col-span-3 {
+    grid-column: 1 / -1;
+  }
+}
